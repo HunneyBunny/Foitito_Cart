@@ -48,11 +48,10 @@ fun HomeScreen(modifier: Modifier,navController: NavHostController) {
         IconButton (onClick = {
             navController.navigate(Cart.root)
         },
-            modifier = Modifier.fillMaxSize()) {
+            modifier = Modifier.align(Alignment.BottomCenter).offset(0.dp, (-100).dp).scale(3f)) {
             Image(
             painter = painterResource(R.drawable.home_button),
             contentDescription = null,
-            modifier = Modifier.align(Alignment.BottomCenter).offset(0.dp, (-100).dp).scale(3f)
             )
         }
 
