@@ -37,18 +37,18 @@ fun HomeScreen(modifier: Modifier,navController: NavHostController) {
     Box(modifier = modifier.fillMaxSize()){
         Image(
             painter = painterResource(R.drawable.background),
-            contentScale = ContentScale.FillBounds,
+            contentScale = ContentScale.Crop,
             contentDescription = null
         )
         Image(
             painter = painterResource(R.drawable._cart),
             contentDescription = null,
-            modifier = Modifier.align(Alignment.Center).offset(0.dp, (-200).dp).scale(3f)
+            modifier = Modifier.align(Alignment.Center).offset(0.dp, (-200).dp).scale(1.6f)
         )
         IconButton (onClick = {
             navController.navigate(Cart.root)
         },
-            modifier = Modifier.align(Alignment.BottomCenter).offset(0.dp, (-100).dp).scale(3f)) {
+            modifier = Modifier.align(Alignment.BottomCenter).offset(0.dp, (-80).dp).scale(2f)) {
             Image(
             painter = painterResource(R.drawable.home_button),
             contentDescription = null,
