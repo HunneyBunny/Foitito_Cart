@@ -11,3 +11,7 @@ object Home:Destinations{
 object Cart:Destinations{
     override val root = "Cart"
 }
+
+object Budget:Destinations{
+    override val root = "Budget"
+}

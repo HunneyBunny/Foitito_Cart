@@ -33,6 +33,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.foitito_cart.ui.theme.Foitito_cartTheme
 
 class CartMain : ComponentActivity() {
@@ -48,7 +50,7 @@ class CartMain : ComponentActivity() {
 }
 
 @Composable
-fun showCustomDialogBox() {
+fun showCustomDialogBox(navController: NavHostController) {
     val context = LocalContext.current
     val dialog = Dialog(context)
     dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -64,20 +66,26 @@ fun showCustomDialogBox() {
     }
 
     dialog.show()
-    ItemList(Modifier, budget)
+    ItemList(Modifier, navController)
 }
 
 @Composable
-fun ItemList(modifier: Modifier,budget : EditText) {
+fun ItemList(modifier: Modifier, navController: NavHostController) {
     Box(modifier = modifier.fillMaxSize()){
-        Text(
-            text = budget.getText().toString(),
-            fontSize = 50.sp
-        )
         Image(
             painter = painterResource(R.drawable.mainbg),
             contentDescription = null,
             contentScale = ContentScale.FillBounds
         )
+        IconButton (onClick = {
+           navController.navigate(Budget.root)
+        },
+            modifier = Modifier.align(Alignment.BottomEnd)) {
+            Image(
+                painter = painterResource(R.drawable.final_button),
+                contentDescription = null,
+            )
+        }
+
     }
 }
