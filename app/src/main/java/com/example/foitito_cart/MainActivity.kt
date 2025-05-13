@@ -31,7 +31,7 @@ fun MyNavigation(){
             HomeScreen(modifier = Modifier,navController)
         }
         composable(Cart.root) {
-            showCustomDialogBox(navController)
+            ItemList(Modifier,navController)
         }
         composable(Budget.root){
             FinalScreen(Modifier)

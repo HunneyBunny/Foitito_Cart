@@ -50,32 +50,17 @@ class CartMain : ComponentActivity() {
 }
 
 @Composable
-fun showCustomDialogBox(navController: NavHostController) {
-    val context = LocalContext.current
-    val dialog = Dialog(context)
-    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-    dialog.setCancelable(false)
-    dialog.setContentView(R.layout.budget_dialog_box)
-    dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-    val btnConf : Button = dialog.findViewById(R.id.confirm_button)
-    val budget : EditText = dialog.findViewById(R.id.budget)
-
-    btnConf.setOnClickListener{
-        dialog.dismiss()
-    }
-
-    dialog.show()
-    ItemList(Modifier, navController)
-}
-
-@Composable
-fun ItemList(modifier: Modifier, navController: NavHostController) {
+fun ItemList(modifier: Modifier,navController: NavHostController) {
     Box(modifier = modifier.fillMaxSize()){
         Image(
             painter = painterResource(R.drawable.mainbg),
             contentDescription = null,
             contentScale = ContentScale.FillBounds
+        )
+        Text(
+            text = "haiii",
+            fontSize = 25.sp,
+            modifier = Modifier.align(Alignment.Center)
         )
         IconButton (onClick = {
            navController.navigate(Budget.root)
