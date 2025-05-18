@@ -1,5 +1,7 @@
 package com.example.foitito_cart
 
+import android.R.attr.maxHeight
+import android.R.attr.maxWidth
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -15,6 +17,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -44,6 +47,9 @@ fun HomeScreen(modifier: Modifier,navController: NavHostController) {
     val context = LocalContext.current
     val dialog = Dialog(context)
 
+    val screenWidth = maxWidth
+    val screenHeight = maxHeight
+
     Box(modifier = modifier.fillMaxSize()){
         Image(
             painter = painterResource(R.drawable.background),
@@ -53,12 +59,12 @@ fun HomeScreen(modifier: Modifier,navController: NavHostController) {
         Image(
             painter = painterResource(R.drawable._cart),
             contentDescription = null,
-            modifier = Modifier.align(Alignment.Center).offset(0.dp, (-200).dp).scale(2.2f)
+            modifier = Modifier.align(Alignment.Center).offset(0.dp, (-200).dp).size(400.dp)
         )
         Image(
             painter = painterResource(R.drawable.logo),
             contentDescription = null,
-            modifier = Modifier.align(Alignment.Center).offset(0.dp, (-100).dp).scale(1f)
+            modifier = Modifier.align(Alignment.Center).offset(0.dp, (-80).dp).size(120.dp)
         )
         IconButton (onClick = {
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
