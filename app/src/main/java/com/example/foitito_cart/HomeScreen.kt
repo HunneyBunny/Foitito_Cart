@@ -37,6 +37,7 @@ class HomeScreen : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Foitito_cartTheme {
+
             }
         }
     }

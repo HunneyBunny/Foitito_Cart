@@ -31,7 +31,7 @@ fun MyNavigation(){
             HomeScreen(modifier = Modifier,navController)
         }
         composable(Cart.root) {
-            ItemList(Modifier,navController)
+            ItemListScreen(navController)
         }
         composable(Budget.root){
             FinalScreen(Modifier)

@@ -31,7 +31,6 @@ class BudgetCheck : ComponentActivity() {
         setContent {
             Foitito_cartTheme {
                 FinalScreen(Modifier)
-
             }
         }
     }
@@ -44,11 +43,6 @@ fun FinalScreen(modifier: Modifier) {
             painter = painterResource(R.drawable.background),
             contentDescription = null,
             contentScale = ContentScale.FillBounds
-        )
-        Image(
-            painter = painterResource(R.drawable.background),
-            contentScale = ContentScale.Crop,
-            contentDescription = null
         )
         Image(
             painter = painterResource(R.drawable._cart),
