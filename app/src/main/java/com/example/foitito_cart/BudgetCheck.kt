@@ -1,5 +1,7 @@
 package com.example.foitito_cart
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -22,11 +24,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.foitito_cart.ui.theme.Foitito_cartTheme
+import kotlin.math.abs
 
 class BudgetCheck : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +46,7 @@ class BudgetCheck : ComponentActivity() {
 
 @Composable
 fun FinalScreen(modifier: Modifier,limit: Double) {
+    val context = LocalContext.current
     Box(modifier = modifier.fillMaxSize()){
         Image(
             painter = painterResource(R.drawable.background),
@@ -64,16 +69,34 @@ fun FinalScreen(modifier: Modifier,limit: Double) {
                 color = androidx.compose.ui.graphics.Color.White,
                 fontWeight = FontWeight.Bold,
                 fontSize = 24.sp,
-                modifier = Modifier.align(Alignment.Center).padding(start = 12.dp, end = 12.dp)
+                modifier = Modifier.align(Alignment.Center).padding(12.dp)
             )
         } else {
             Text(
-                text = "Είσουν εκτός Μπάτζετ κατα "+ limit.toString() + "€ :(",
+                text = "Είσουν εκτός Μπάτζετ κατα "+ abs(limit).toString() + "€ :(",
                 color = androidx.compose.ui.graphics.Color.White,
                 fontWeight = FontWeight.Bold,
                 fontSize = 24.sp,
-                modifier = Modifier.align(Alignment.Center).padding(start = 12.dp, end = 12.dp)
+                modifier = Modifier.align(Alignment.Center).padding(12.dp)
+            )
+        }
+        IconButton(
+            onClick = {restartApp(context)},
+            modifier = Modifier.scale(1.2f).align(Alignment.BottomCenter).padding(bottom = 80.dp)
+        ) {
+            Image(
+                painter = painterResource(R.drawable.restart),
+                contentDescription = "Go to Budget",
+                alignment = Alignment.Center
             )
         }
     }
+}
+
+fun restartApp(context: Context) {
+    val intent = context.packageManager
+        .getLaunchIntentForPackage(context.packageName)
+    intent?.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+    context.startActivity(intent)
+    Runtime.getRuntime().exit(0) // Optional: forcefully kill the old process
 }

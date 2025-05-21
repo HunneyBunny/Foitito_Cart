@@ -134,19 +134,19 @@ fun ItemList(
                     Text(
                         text = name,
                         color = Color.Black,
-                        fontSize = 20.sp,
+                        fontSize = 24.sp,
                         fontWeight = FontWeight.SemiBold
                     )
                     Text(
                         text = quantity.toString(),
                         color = Color.Black,
-                        fontSize = 20.sp,
+                        fontSize = 24.sp,
                         fontWeight = FontWeight.SemiBold
                     )
                     Text(
                         text = price.toString() + "€",
                         color = Color.Black,
-                        fontSize = 20.sp,
+                        fontSize = 24.sp,
                         fontWeight = FontWeight.SemiBold
                     )
                 }
@@ -160,10 +160,12 @@ fun ItemList(
             Text(
                 text = "Μπάτζετ: "+String.format("%.2f", budget)+"€",
                 fontSize = 24.sp,
+                fontWeight = FontWeight.Bold
             )
             Text(
                 text = "Σύνολο: "+String.format("%.2f", total)+"€",
                 fontSize = 24.sp,
+                fontWeight = FontWeight.Bold
             )
         }
 
