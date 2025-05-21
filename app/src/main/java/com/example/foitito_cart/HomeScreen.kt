@@ -77,7 +77,8 @@ fun HomeScreen(modifier: Modifier,navController: NavHostController) {
             val budget : EditText = dialog.findViewById(R.id.budget)
 
             btnConf.setOnClickListener{
-                navController.navigate(Cart.root)
+                val budgetValue = budget.text.toString().toDoubleOrNull()
+                navController.navigate("${Cart.root}/$budgetValue")
                 dialog.dismiss()
             }
 

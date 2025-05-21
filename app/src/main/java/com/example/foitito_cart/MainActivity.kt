@@ -6,9 +6,11 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.foitito_cart.ui.theme.Foitito_cartTheme
 
 class MainActivity : ComponentActivity() {
@@ -30,11 +32,16 @@ fun MyNavigation(){
         composable(Home.root) {
             HomeScreen(modifier = Modifier,navController)
         }
-        composable(Cart.root) {
-            ItemListScreen(navController)
+        composable("${Cart.root}/{budget}",
+            arguments = listOf(navArgument("budget") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val budget = backStackEntry.arguments?.getString("budget")?.toDoubleOrNull() ?: 0.0
+            ItemListScreen(navController, modifier = Modifier, budget = budget )
         }
-        composable(Budget.root){
-            FinalScreen(Modifier)
+        composable("${Budget.root}/{budgetLimit}",
+            arguments = listOf(navArgument("budgetLimit") { type = NavType.StringType })){backStackEntry ->
+            val budgetLimit = backStackEntry.arguments?.getString("budgetLimit")?.toDoubleOrNull() ?: 0.0
+            FinalScreen(Modifier, limit = budgetLimit)
         }
     }
 }

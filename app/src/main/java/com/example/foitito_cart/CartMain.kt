@@ -2,31 +2,44 @@ package com.example.foitito_cart
 
 import android.app.Dialog
 import android.graphics.drawable.ColorDrawable
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import android.os.Bundle
 import android.view.Window
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.foitito_cart.ui.theme.Foitito_cartTheme
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.runtime.DisposableEffect
 
 class CartMain : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,26 +47,24 @@ class CartMain : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Foitito_cartTheme {
-                // Call your main composable here and pass navController if needed
-                // For example:
-                // ItemListScreen(navController = rememberNavController())
-                // TODO: Replace with actual navController
+                TODO()
             }
         }
     }
 }
 
 @Composable
-fun ItemListScreen(navController: NavHostController, modifier: Modifier = Modifier) {
+fun ItemListScreen(navController: NavHostController, modifier: Modifier = Modifier,budget: Double) {
     // This is where the items state lives — remembered once
-    val items = remember { mutableStateListOf<Triple<String, Int, Double>>() }
+    val items = remember { mutableListOf<Triple<String, Int, Double>>() }
 
     // Pass items and a function to add items down to ItemList UI
     ItemList(
         modifier = modifier,
         items = items,
         onAddItem = { newItem -> items.add(newItem) },
-        navController = navController
+        navController = navController,
+        budget
     )
 }
 
@@ -62,7 +73,8 @@ fun ItemList(
     modifier: Modifier = Modifier,
     items: List<Triple<String, Int, Double>>,
     onAddItem: (Triple<String, Int, Double>) -> Unit,
-    navController: NavHostController
+    navController: NavHostController,
+    budget: Double
 ) {
     val context = LocalContext.current
     var showDialog by remember { mutableStateOf(false) }
@@ -142,11 +154,18 @@ fun ItemList(
             }
         }
 
-        Text(
-            text = "Σύνολο: $total",
-            fontSize = 40.sp,
-            modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = 130.dp)
-        )
+        Row(modifier = Modifier.fillMaxWidth().align(Alignment.BottomCenter).padding(bottom = 140.dp),
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            ) {
+            Text(
+                text = "Μπάτζετ: "+String.format("%.2f", budget)+"€",
+                fontSize = 24.sp,
+            )
+            Text(
+                text = "Σύνολο: "+String.format("%.2f", total)+"€",
+                fontSize = 24.sp,
+            )
+        }
 
         Row(
             modifier = Modifier
@@ -168,7 +187,9 @@ fun ItemList(
             }
 
             IconButton(
-                onClick = { navController.navigate(Budget.root) },
+                onClick = {
+                    val budgetLimit = (budget - total).toString()
+                    navController.navigate("${Budget.root}/$budgetLimit") },
                 modifier = Modifier.scale(1.2f)
             ) {
                 Image(
